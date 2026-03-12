@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {ThemedText} from "@/components/themed-text";
 
 export default function TestPage() {
     const handlePress = () => {
@@ -7,12 +8,14 @@ export default function TestPage() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Hello! This is a Test Page</Text>
-            <Text style={styles.subtitle}>I am inside the (tabs) folder.</Text>
+            <View style={styles.container}>
+                <ThemedText type="defaultSemiBold" style={styles.title}>Hello! This is the MyWorkouts Page</ThemedText>
+                <ThemedText type="defaultSemiBold" style={styles.subtitle}>I am inside the (tabs) folder.</ThemedText>
 
-            <TouchableOpacity style={styles.button} onPress={handlePress}>
-                <Text style={styles.buttonText}>Click Me</Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={handlePress}>
+                    <ThemedText type="defaultSemiBold" style={styles.buttonText}>Click Me</ThemedText>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -22,7 +25,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f5f5f5',
     },
     title: {
         fontSize: 22,

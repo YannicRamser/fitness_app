@@ -1,17 +1,18 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {ThemedText} from "@/components/themed-text";
 
-export default function TestPage() {
+export default function HomePage() {
     const handlePress = () => {
         alert('Button pressed!');
     };
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Hello! This is a Test Page</Text>
-            <Text style={styles.subtitle}>I am inside the (tabs) folder.</Text>
+            <ThemedText type="defaultSemiBold" style={styles.title}>Hello! This is the Home Page</ThemedText>
+            <ThemedText type="defaultSemiBold" style={styles.subtitle}>I am inside the (tabs) folder.</ThemedText>
 
             <TouchableOpacity style={styles.button} onPress={handlePress}>
-                <Text style={styles.buttonText}>Click Me</Text>
+                <ThemedText type="defaultSemiBold" style={styles.buttonText}>Click Me</ThemedText>
             </TouchableOpacity>
         </View>
     );
@@ -22,7 +23,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f5f5f5',
     },
     title: {
         fontSize: 22,

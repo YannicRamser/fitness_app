@@ -1,3 +1,11 @@
+# Application info
+
+## Colors and themes
+The themes are in the theme.ts file in the constants folder.
+The app special color is a light blue (#0bd2ec)
+
+
+
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
