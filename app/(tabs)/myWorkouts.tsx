@@ -1,20 +1,21 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import {ThemedText} from "@/components/themed-text";
-import {Redirect} from "expo-router";
 
-export default function HomePage() {
+export default function TestPage() {
     const handlePress = () => {
-        return <Redirect href="/myWorkouts" />
+        alert('Button pressed!');
     };
 
     return (
         <View style={styles.container}>
-            <ThemedText type="defaultSemiBold" style={styles.title}>Hello! This is the Home Page</ThemedText>
-            <ThemedText type="defaultSemiBold" style={styles.subtitle}>I am inside the (tabs) folder.</ThemedText>
+            <View style={styles.container}>
+                <ThemedText type="defaultSemiBold" style={styles.title}>Hello! This is the MyWorkouts Page</ThemedText>
+                <ThemedText type="defaultSemiBold" style={styles.subtitle}>I am inside the (tabs) folder.</ThemedText>
 
-            <TouchableOpacity style={styles.button} onPress={handlePress}>
-                <ThemedText type="defaultSemiBold" style={styles.buttonText}>Click Me</ThemedText>
-            </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={handlePress}>
+                    <ThemedText type="defaultSemiBold" style={styles.buttonText}>Click Me</ThemedText>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
