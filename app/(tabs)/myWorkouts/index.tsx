@@ -1,5 +1,6 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {ThemedText} from "@/components/themed-text";
+import {Link} from "expo-router";
 
 export default function TestPage() {
     const handlePress = () => {
@@ -8,14 +9,18 @@ export default function TestPage() {
 
     return (
         <View style={styles.container}>
-            <View style={styles.container}>
-                <ThemedText type="defaultSemiBold" style={styles.title}>Hello! This is the MyWorkouts Page</ThemedText>
-                <ThemedText type="defaultSemiBold" style={styles.subtitle}>I am inside the (tabs) folder.</ThemedText>
+            <ThemedText type="defaultSemiBold" style={styles.title}>Hello! This is the MyWorkouts Page</ThemedText>
+            <ThemedText type="defaultSemiBold" style={styles.subtitle}>I am inside the (tabs) folder.</ThemedText>
 
-                <TouchableOpacity style={styles.button} onPress={handlePress}>
-                    <ThemedText type="defaultSemiBold" style={styles.buttonText}>Click Me</ThemedText>
+            <TouchableOpacity style={styles.button} onPress={handlePress}>
+                <ThemedText type="defaultSemiBold" style={styles.buttonText}>Click Me</ThemedText>
+            </TouchableOpacity>
+
+            <Link href="/myWorkouts/test" asChild>
+                <TouchableOpacity style={styles.button}>
+                    <ThemedText type="defaultSemiBold">Vai a Test</ThemedText>
                 </TouchableOpacity>
-            </View>
+            </Link>
         </View>
     );
 }

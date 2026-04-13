@@ -1,10 +1,12 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import {ThemedText} from "@/components/themed-text";
-import {Redirect} from "expo-router";
+import {Link, useNavigation} from "expo-router";
 
 export default function HomePage() {
+    const navigation = useNavigation();
+
     const handlePress = () => {
-        return <Redirect href="/myWorkouts" />
+        console.log("test")
     };
 
     return (
@@ -15,6 +17,12 @@ export default function HomePage() {
             <TouchableOpacity style={styles.button} onPress={handlePress}>
                 <ThemedText type="defaultSemiBold" style={styles.buttonText}>Click Me</ThemedText>
             </TouchableOpacity>
+
+            <Link href="/myWorkouts" asChild>
+                <TouchableOpacity style={styles.button}>
+                    <ThemedText type="defaultSemiBold" style={styles.buttonText}>Vai ai miei Allenamenti</ThemedText>
+                </TouchableOpacity>
+            </Link>
         </View>
     );
 }
