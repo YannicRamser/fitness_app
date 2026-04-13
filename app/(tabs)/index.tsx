@@ -1,9 +1,10 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import {ThemedText} from "@/components/themed-text";
+import {Redirect} from "expo-router";
 
 export default function HomePage() {
     const handlePress = () => {
-        alert('Button pressed!');
+        return <Redirect href="/myWorkouts" />
     };
 
     return (
