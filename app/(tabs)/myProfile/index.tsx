@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import {ThemedText} from "@/components/themed-text";
+import {Link} from "expo-router";
 
 export default function MyProfilePage() {
     const handlePress = () => {
@@ -14,6 +15,12 @@ export default function MyProfilePage() {
             <TouchableOpacity style={styles.button} onPress={handlePress}>
                 <ThemedText type="defaultSemiBold" style={styles.buttonText}>Click Me</ThemedText>
             </TouchableOpacity>
+
+            <Link href="/myProfile/test" asChild>
+                <TouchableOpacity style={styles.button}>
+                    <ThemedText type="defaultSemiBold">Vai a Test</ThemedText>
+                </TouchableOpacity>
+            </Link>
         </View>
     );
 }

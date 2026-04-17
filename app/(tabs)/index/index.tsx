@@ -23,6 +23,12 @@ export default function HomePage() {
                     <ThemedText type="defaultSemiBold" style={styles.buttonText}>Vai ai miei Allenamenti</ThemedText>
                 </TouchableOpacity>
             </Link>
+
+            <Link href="/(tabs)/index/test" asChild>
+                <TouchableOpacity style={styles.button}>
+                    <ThemedText type="defaultSemiBold">Vai a Test</ThemedText>
+                </TouchableOpacity>
+            </Link>
         </View>
     );
 }
