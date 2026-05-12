@@ -27,7 +27,7 @@ export const getGlobalStyles = (theme: 'light' | 'dark') => {
             borderRadius: 8,
         },
         buttonText: {
-            color: colors.text,
+            color: '#fff',
             fontWeight: '600',
         },
     });

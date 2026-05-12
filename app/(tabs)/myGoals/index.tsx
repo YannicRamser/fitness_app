@@ -1,54 +1,62 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import {ThemedText} from "@/components/themed-text";
-import {Link} from "expo-router";
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import Screen from '@/components/ui/Screen';
+import { Card } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { ProgressBar } from '@/components/ui/ProgressBar';
+import { useTheme } from '@/providers/ThemeProvider';
 
-export default function MyGoalsPage() {
-    const handlePress = () => {
-        alert('Button pressed!');
-    };
+const GOALS = [
+  { emoji: '🏋️', title: 'Bench press 80kg', subtitle: 'Target: May 30', value: 0.62 },
+  { emoji: '🏃', title: 'Run 50km this month', subtitle: 'Target: Apr 30', value: 0.4 },
+  { emoji: '💧', title: 'Drink 2L water daily', subtitle: 'Target: Ongoing', value: 0.85 },
+];
 
-    return (
-        <View style={styles.container}>
-            <ThemedText type="defaultSemiBold" style={styles.title}>Hello! This is the MyGoal Page</ThemedText>
-            <ThemedText type="defaultSemiBold" style={styles.subtitle}>I am inside the (tabs) folder.</ThemedText>
+export default function GoalsPage() {
+  const { colors } = useTheme();
 
-            <TouchableOpacity style={styles.button} onPress={handlePress}>
-                <ThemedText type="defaultSemiBold" style={styles.buttonText}>Click Me</ThemedText>
-            </TouchableOpacity>v
+  return (
+    <Screen scroll padded>
+      <Text style={[styles.title, { color: colors.text }]}>My goals</Text>
+      <Text style={[styles.subtitle, { color: colors.textMuted }]}>3 active</Text>
 
-            <Link href="/myGoals/test" asChild>
-                <TouchableOpacity style={styles.button}>
-                    <ThemedText type="defaultSemiBold">Vai a Test</ThemedText>
-                </TouchableOpacity>
-            </Link>
-        </View>
-    );
+      {GOALS.map((goal, i) => (
+        <Card key={i} style={styles.card}>
+          <View style={styles.goalHeader}>
+            <View style={styles.emojiRow}>
+              <Text style={styles.emoji}>{goal.emoji}</Text>
+              <View style={styles.ml}>
+                <Text style={[styles.goalTitle, { color: colors.text }]}>{goal.title}</Text>
+                <Text style={[styles.goalSub, { color: colors.textMuted }]}>{goal.subtitle}</Text>
+              </View>
+            </View>
+            <Text style={[styles.percent, { color: colors.tint }]}>
+              {Math.round(goal.value * 100)}%
+            </Text>
+          </View>
+          <ProgressBar value={goal.value} />
+        </Card>
+      ))}
+
+      <Button title="Add new goal" onPress={() => {}} variant="ghost" fullWidth />
+    </Screen>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    title: {
-        fontSize: 22,
-        fontWeight: 'bold',
-        marginBottom: 10,
-    },
-    subtitle: {
-        fontSize: 16,
-        color: '#666',
-        marginBottom: 20,
-    },
-    button: {
-        backgroundColor: '#007AFF',
-        paddingHorizontal: 20,
-        paddingVertical: 10,
-        borderRadius: 8,
-    },
-    buttonText: {
-        color: 'white',
-        fontWeight: '600',
-    },
+  title: { fontSize: 28, fontWeight: '700', marginBottom: 2 },
+  subtitle: { fontSize: 14, marginBottom: 20 },
+  card: { marginBottom: 12 },
+  goalHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 12,
+  },
+  emojiRow: { flexDirection: 'row', alignItems: 'center', flex: 1 },
+  emoji: { fontSize: 24 },
+  ml: { marginLeft: 10, flex: 1 },
+  goalTitle: { fontSize: 15, fontWeight: '600' },
+  goalSub: { fontSize: 12, marginTop: 2 },
+  percent: { fontSize: 14, fontWeight: '700', marginLeft: 8 },
 });

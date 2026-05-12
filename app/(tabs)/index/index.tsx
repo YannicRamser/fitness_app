@@ -1,62 +1,102 @@
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import {ThemedText} from "@/components/themed-text";
-import {Link, useNavigation} from "expo-router";
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import Screen from '@/components/ui/Screen';
+import { Card } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { StatTile } from '@/components/ui/StatTile';
+import { useTheme } from '@/providers/ThemeProvider';
+
+const WEEK_DAYS = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+const COMPLETED = [true, true, false, true, true, false, false];
 
 export default function HomePage() {
-    const navigation = useNavigation();
+  const { colors } = useTheme();
 
-    const handlePress = () => {
-        console.log("test")
-    };
+  return (
+    <Screen scroll padded>
+      <View style={styles.greetingRow}>
+        <Text style={[styles.greetingSmall, { color: colors.textMuted }]}>Good morning,</Text>
+        <Text style={[styles.greetingBig, { color: colors.text }]}>Yannick 👋</Text>
+      </View>
 
-    return (
-        <View style={styles.container}>
-            <ThemedText type="defaultSemiBold" style={styles.title}>Hello! This is the Home Page</ThemedText>
-            <ThemedText type="defaultSemiBold" style={styles.subtitle}>I am inside the (tabs) folder.</ThemedText>
-
-            <TouchableOpacity style={styles.button} onPress={handlePress}>
-                <ThemedText type="defaultSemiBold" style={styles.buttonText}>Click Me</ThemedText>
-            </TouchableOpacity>
-
-            <Link href="/myWorkouts" asChild>
-                <TouchableOpacity style={styles.button}>
-                    <ThemedText type="defaultSemiBold" style={styles.buttonText}>Vai ai miei Allenamenti</ThemedText>
-                </TouchableOpacity>
-            </Link>
-
-            <Link href="/(tabs)/index/test" asChild>
-                <TouchableOpacity style={styles.button}>
-                    <ThemedText type="defaultSemiBold">Vai a Test</ThemedText>
-                </TouchableOpacity>
-            </Link>
+      <Card style={styles.card}>
+        <View style={styles.row}>
+          <View style={[styles.iconCircle, { backgroundColor: colors.tintMuted }]}>
+            <Text style={styles.flame}>🔥</Text>
+          </View>
+          <View style={styles.ml}>
+            <Text style={[styles.streakNum, { color: colors.text }]}>7</Text>
+            <Text style={[styles.mutedText, { color: colors.textMuted }]}>Day streak</Text>
+          </View>
         </View>
-    );
+      </Card>
+
+      <Card style={styles.card}>
+        <Text style={[styles.cardTitle, { color: colors.text }]}>Full body · 45 min</Text>
+        <Text style={[styles.mutedText, { color: colors.textMuted }]}>6 exercises</Text>
+        <View style={styles.mt}>
+          <Button title="Start workout" onPress={() => {}} />
+        </View>
+      </Card>
+
+      <Card style={styles.card}>
+        <Text style={[styles.sectionTitle, { color: colors.text }]}>Weekly activity</Text>
+        <View style={styles.weekRow}>
+          {WEEK_DAYS.map((day, i) => (
+            <View key={i} style={styles.dayCol}>
+              <View
+                style={[
+                  styles.dayCircle,
+                  { backgroundColor: COMPLETED[i] ? colors.tint : colors.surface },
+                ]}
+              />
+              <Text style={[styles.dayLabel, { color: colors.textMuted }]}>{day}</Text>
+            </View>
+          ))}
+        </View>
+      </Card>
+
+      <View style={styles.statsRow}>
+        <StatTile value="4" label="Workouts this week" style={styles.statTile} />
+        <StatTile value="175" label="Minutes" style={styles.statTile} />
+      </View>
+
+      <Text style={[styles.sectionTitle, { color: colors.text }]}>Quick actions</Text>
+      <View style={styles.actionsRow}>
+        <Button title="Log weight" onPress={() => {}} variant="ghost" size="sm" />
+        <Button title="Add goal" onPress={() => {}} variant="ghost" size="sm" />
+        <Button title="History" onPress={() => {}} variant="ghost" size="sm" />
+      </View>
+    </Screen>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    title: {
-        fontSize: 22,
-        fontWeight: 'bold',
-        marginBottom: 10,
-    },
-    subtitle: {
-        fontSize: 16,
-        color: '#666',
-        marginBottom: 20,
-    },
-    button: {
-        backgroundColor: '#007AFF',
-        paddingHorizontal: 20,
-        paddingVertical: 10,
-        borderRadius: 8,
-    },
-    buttonText: {
-        color: 'white',
-        fontWeight: '600',
-    },
+  greetingRow: { marginBottom: 20 },
+  greetingSmall: { fontSize: 14, marginBottom: 2 },
+  greetingBig: { fontSize: 28, fontWeight: '700' },
+  card: { marginBottom: 12 },
+  row: { flexDirection: 'row', alignItems: 'center' },
+  iconCircle: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  flame: { fontSize: 22 },
+  ml: { marginLeft: 12 },
+  streakNum: { fontSize: 24, fontWeight: '700' },
+  mutedText: { fontSize: 13, marginTop: 2 },
+  cardTitle: { fontSize: 17, fontWeight: '600' },
+  mt: { marginTop: 12 },
+  sectionTitle: { fontSize: 16, fontWeight: '600', marginBottom: 12 },
+  weekRow: { flexDirection: 'row', justifyContent: 'space-between', marginTop: 8 },
+  dayCol: { alignItems: 'center', gap: 4 },
+  dayCircle: { width: 28, height: 28, borderRadius: 14 },
+  dayLabel: { fontSize: 11 },
+  statsRow: { flexDirection: 'row', gap: 12, marginBottom: 12 },
+  statTile: { flex: 1 },
+  actionsRow: { flexDirection: 'row', gap: 8, flexWrap: 'wrap' },
 });
